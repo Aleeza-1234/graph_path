@@ -10,27 +10,27 @@ for u, v, w in data:
     if v not in graph:
         graph[v] = []
     graph[u].append((v, w))
-    graph[v].append((u, w))  # Undirected graph
+    graph[v].append((u, w))  
 
 # Function to find the path from start to end using BFS
 def find_path(start, end):
-    queue = [(start, [])]  # (current node, path edges)
+    queue = [(start, [])]  
     visited = set()
 
     while queue:
-        node, path = queue.pop(0)  # Popping the first element (FIFO behavior)
+        node, path = queue.pop(0) 
         if node == end:
-            return path  # Return the edge weights in the path
+            return path  
 
         if node in visited:
             continue
         visited.add(node)
 
-        for neighbor, weight in graph.get(node, []):  # Use .get() to avoid KeyError
+        for neighbor, weight in graph.get(node, []):  
             if neighbor not in visited:
                 queue.append((neighbor, path + [weight]))
 
-    return []  # If no path found (should not happen for a connected graph)
+    return []  
 
 # Processing queries
 sol = []
@@ -38,10 +38,10 @@ for a, b, k in queries:
     path_weights = find_path(a, b)
     
     if len(path_weights) >= k:
-        path_weights.sort(reverse=True)  # Sort in descending order
+        path_weights.sort(reverse=True)  
         sol.append(path_weights[k-1])
     else:
-        sol.append(-1)  # If there are not enough edges
+        sol.append(-1)  
 
 print(sol)
 
